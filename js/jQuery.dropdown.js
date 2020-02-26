@@ -59,13 +59,13 @@
 		open:function(){
 			var self = this;
 			this.dd.toggleClass( 'cd-active' );
-			this.listopts.css( 'height', ( this.optsCount + 1 ) * ( this.size.height + this.options.listNum ) );
+			this.listopts.css( 'height', ( this.optsCount ) * ( this.size.height) );
 			this.opts.each( function( i ) {
 
 				$( this ).css( {
 					opacity:1,
 					visibility : 'visible',
-					top : ( i + 1 ) * ( self.size.height + self.options.listNum ),
+					top : ( i) * ( self.size.height ),
 					width : self.size.width,
 					marginLeft : 0,
 					transitionDelay : self.options.delay? self.options.slidingIn ? ( i * self.options.delay ) + 'ms' : ( ( self.optsCount - 1 - i ) * self.options.delay ) + 'ms' : 0
@@ -110,7 +110,7 @@
 				.each( function( i ) {
 					$( this ).css( {
 						zIndex : self.minZIndex + self.optsCount - 1 - i,
-						top : self.options.slidingIn ? ( i + 1 ) * ( self.size.height + self.options.listNum ) : 0,
+						top : self.options.slidingIn ? ( i  ) * ( self.size.height) : 0,
 						left : 0,
 						marginLeft : self.options.slidingIn ? i % 2 === 0 ? self.options.slidingIn : - self.options.slidingIn : 0,
 						opacity: self.options.slidingIn ? 0 : 1,
@@ -121,14 +121,7 @@
 
 			if( !this.options.slidingIn ) {
 				this.opts
-					.eq( this.optsCount - 1 )
-					.css( { top : this.options.stack ? 9 : 0, left : this.options.stack ? 4 : 0, width : this.options.stack ? this.size.width - 8 : this.size.width, transform : 'none' } )
-					.end()
-					.eq( this.optsCount - 2 )
-					.css( { top : this.options.stack ? 6 : 0, left : this.options.stack ? 2 : 0, width : this.options.stack ? this.size.width - 4 : this.size.width, transform : 'none' } )
-					.end()
-					.eq( this.optsCount - 3 )
-					.css( { top : this.options.stack ? 3 : 0, left : 0, transform : 'none' } );
+					.css( { top : 0, left : 0, transform : 'none' } );
 			}
 
 		},
