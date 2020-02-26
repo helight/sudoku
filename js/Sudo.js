@@ -205,7 +205,7 @@ Sudoku.prototype = {
 			self.check();
 			$('#selectBoard').css({'display':'none'});
 			var solveStr = self.solving.join();
-			if(solveStr.indexOf('0') <= 0){
+			if(solveStr.indexOf('0') < 0){
 				self.checkAllAnswer();
 			}//最后一个检查是否完成游戏			
 		}).mouseleave(function(){
