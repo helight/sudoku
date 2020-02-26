@@ -181,15 +181,11 @@ Sudoku.prototype = {
 			var $target = $(eventObj.target);
 			var posi = $target.position();
 			var gameBoardPos = $(this).position();
-			var selectBoardPos = {top:posi.top + 40,left:posi.left + 45};
-			console.log("gameBoardPos.top+posi.top: " + gameBoardPos.top + " : "+ posi.top);
-			console.log("gameBoardPos.left+posi.left: " + gameBoardPos.left + " : "+ posi.left);
-			console.log("selectBoardPos.top: " + selectBoardPos.top + " selectBoardPos.left: " + selectBoardPos.left);
+			var selectBoardPos = {top:posi.top + 40,left:posi.left + 40};
 			var $selectBoard = $("#selectBoard");
 			if($target.hasClass('editable')){
 				if(posi.top+$selectBoard.height()>$(this).height()){
 					selectBoardPos.top = selectBoardPos.top-$selectBoard.height()+$target.height();
-					console.log("selectBoard.height()+$target.height(): " + $selectBoard.height()+" : "+$target.height());
 				}
 				if(posi.left+$selectBoard.width()>$(this).width()){
 					selectBoardPos.left = selectBoardPos.left-$selectBoard.width()+$target.width();
@@ -209,7 +205,9 @@ Sudoku.prototype = {
 			self.check();
 			$('#selectBoard').css({'display':'none'});
 			var solveStr = self.solving.join();
-			if(solveStr.indexOf('0')<0){self.checkAllAnswer();}//最后一个检查是否完成游戏			
+			if(solveStr.indexOf('0') <= 0){
+				self.checkAllAnswer();
+			}//最后一个检查是否完成游戏			
 		}).mouseleave(function(){
 			$(this).css({'display':'none'});
 		});;
@@ -284,7 +282,7 @@ Sudoku.prototype = {
 		if (flag == 0 && this.gameState != 'init') {
 			clearInterval(this.gameTimer);
 			//console.log("完全正确！");
-			this.showTips("你太棒了");
+			this.showTips("完全正确<br>你太棒了");
 		}
 	},
 	// 判断生成的游戏局面是否只有一种答案
@@ -424,7 +422,11 @@ Sudoku.prototype = {
 	},
 	showTips : function(_msg){
 		$("#tips").html(_msg).css({"opacity":1});
-		setTimeout(function(){$('#tips').css({'opacity':0})},2000);
+		$('#tips').css({'display':'block'});
+		setTimeout(function(){
+			$('#tips').css({'opacity':0})
+			$('#tips').css({'display':'none'});
+		},2000);
 	}
 };
 
